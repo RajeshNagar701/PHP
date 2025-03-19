@@ -1,0 +1,163 @@
+======= INDEX START ==========
+Create UNIQUE IUNDEX index_name ON table_name (column_name1, column_name2…)
+
+SHOW INDEX FROM database_name.table_name
+======= INDEX END ==========
+
+
+========= View START ===============
+create view <viewName> as select <columnName1>,<columnName2> from <tableName>;
+ALTER VIEW newview AS SELECT uid,uname,password FROM register
+drop view ViewName
+========= View END ===============
+
+
+
+
+========= procedure START ===============
+create procedure mypro(IN val1 varchar(100))
+
+Begin 
+
+insert into first (col1) values (val1);
+
+END
+
+call mypro('Value')
+
+
+DELIMITER //
+CREATE PROCEDURE GetOfficeByCountry(IN UserName VARCHAR(255))
+ BEGIN
+ SELECT * 
+ FROM newtable
+ WHERE user_name = UserName;
+ END //
+DELIMITER ;
+
+
+
+DELIMITER //
+CREATE PROCEDURE InserIntoMyTableProcedure(INOUT UserName VARCHAR(255))
+ BEGIN
+ INSERT INTO mytable(user_name) values (UserName);
+ END //
+DELIMITER ;
+
+
+CALL InserIntoMyTableProcedure('UserNameFromProcedure');
+
+========= procedure END ===============
+
+
+
+
+================= Function ==============
+
+DELIMITER //
+CREATE FUNCTION MarksFunction(makrs double) RETURNS VARCHAR(10)
+    
+BEGIN
+    DECLARE lvl varchar(10);
+ 
+    IF makrs > 20 THEN
+ 		SET lvl = 'sras';
+    ELSEIF (makrs <= 15 ) THEN
+        SET lvl = 'chale';
+    ELSEIF makrs < 10 THEN
+        SET lvl = 'bekar';
+    END IF;
+ 
+ RETURN (lvl);
+END
+
+
+
+call function 
+
+SELECT 
+    user_name, MarksFunction(10)
+FROM
+    newtable WHERE marks=10;
+
+
+
+
+================= Function END ==============
+
+
+================= Cursor Start =================
+
+DECLARE finished INTEGER DEFAULT 0;
+DECLARE email varchar(255) DEFAULT "";
+ 
+-- declare cursor for employee email
+DEClARE email_cursor CURSOR FOR 
+ SELECT email FROM employees;
+ 
+-- declare NOT FOUND handler
+DECLARE CONTINUE HANDLER 
+FOR NOT FOUND SET finished = 1;
+================= Cursor End ====================
+
+
+
+
+
+================= tigger START ==============
+
+DELIMITER //
+CREATE TRIGGER before_employee_update 
+    BEFORE UPDATE ON employees
+    FOR EACH ROW 
+BEGIN
+    INSERT INTO employees_audit
+    SET action = 'update',
+     employeeNumber = OLD.employeeNumber,
+        lastname = OLD.lastname,
+        changedat = NOW(); 
+END//
+DELIMITER ;
+	
+
+
+INSERT INTO user_back_up SET userID - OLD.id,
+password = OLD.password,
+date_time = now();
+
+DROP TRIGGER IF EXISTS `before_employee_update`;
+CREATE DEFINER=`root`@`localhost` TRIGGER `before_employee_update` 
+BEFORE UPDATE ON `employees` 
+FOR EACH ROW 
+BEGIN 
+INSERT INTO employees_audit 
+SET action = 'update', 
+perform = 'new_value', 
+employeeNumber = OLD.employeeNumber, 
+lastname = OLD.lastname, 
+changedat = NOW(); 
+END
+
+
+
+================= tigger END ==============
+
+
+=================Cursor start ===============
+DECLARE 
+   c_id customers.id%type; 
+   c_name customerS.No.ame%type; 
+   c_addr customers.address%type; 
+   CURSOR c_customers is 
+      SELECT id, name, address FROM customers; 
+BEGIN 
+   OPEN c_customers; 
+   LOOP 
+   FETCH c_customers into c_id, c_name, c_addr; 
+      EXIT WHEN c_customers%notfound; 
+      dbms_output.put_line(c_id || ' ' || c_name || ' ' || c_addr); 
+   END LOOP; 
+   CLOSE c_customers; 
+END; 
+/
+===============Cursor End==================

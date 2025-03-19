@@ -1,0 +1,114 @@
+<!-- Javascript Code for validation -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+
+.abc:hover{
+	background-color:#0C9;
+	
+	
+	}
+
+</style>
+
+<script type="text/javascript">
+	//function for validation
+function validatename(name)
+{
+	 var ptrn=/^[a-zA-z0-9]{5,8}$/;
+	 er=document.getElementById("error1");
+	 sbmt=document.getElementById("submit");
+	 nam=document.getElementById("name");
+	 if (ptrn.test(name)){
+		 er.innerHTML="matched";
+		 er.style.color="green";
+		 nam.style.borderWidth="2px";
+		 nam.style.borderColor="green";
+		 sbmt.disabled=false;	
+	} 
+	else{
+		er.innerHTML="Not matched";
+		er.style.color="Red";
+		nam.style.borderWidth="2px";
+		nam.style.borderColor="red"
+		sbmt.disabled=true;		
+		}	
+}
+function validateemail(email)
+	{
+	var ptrn=/^[a-zA-Z0-9._]{5,30}[@]{1}[a-zA-Z]{5,7}[.]{1}[a-zA-Z]{2,3}$/;
+	er2=document.getElementById("error2");
+	sbmt=document.getElementById("submit");
+	em=document.getElementById("email");
+	if (ptrn.test(email)){
+	 er2.innerHTML="Matched";
+	 er2.style.color="green";
+	 em.style.borderWidth="2px";
+	 em.style.borderColor="green";
+	 sbmt.disabled=false;	 
+	}
+	else{
+	er2.innerHTML="Not matched";
+	er2.style.color="red";
+	em.style.borderWidth="2px";
+	em.style.borderColor="red";
+	sbmt.disabled=true;
+		}
+	
+	}
+function validatecontact(Con)	{
+	
+	var ptrn=/^[0-9]{10}$/;
+	er3=document.getElementById("error3");
+	sbmt=document.getElementById("submit");
+	cont=document.getElementById("Con");
+	if (ptrn.test(Con)){
+		er3.innerHTML="Matched";
+		er3.style.color="green";
+		cont.style.borderWidth="2px";
+		cont.style.borderColor="green";
+		sbmt.disabled=false;
+		}
+		else{
+		er3.innerHTML="Not Matched"	;
+		er3.style.color="Red";
+		cont.style.borderWidth="2px";
+		cont.style.borderColor="red";
+		sbmt.disabled=true;		
+			
+			}
+	
+	}
+	
+
+
+</script>
+
+
+
+</head>
+
+<body>
+<form>
+<label>Nane</label><br />
+<input type="text" id="name" onkeyup="validatename(this.value)" placeholder="Enter Your Name(min 5) " /><span id="error1"></span><br /><br />
+<label>Email-id</label><br />
+<input type="email" id="email" onkeyup="validateemail(this.value)" placeholder="Enter Your Email" /><span id="error2"></span><br /><br />
+<label>Contact</label><br />
+<input type="text" id="Con" maxlength="10" onkeyup="validatecontact(this.value)" placeholder="Enter Your Contact(10) " /><span id="error3"></span><br /><br />
+<label>Massage</label><br />
+<textarea class="abc" id="msg"></textarea><span id="error4"></span><br /><br /><br />
+
+<input type="submit" id="submit" disabled="disabled" value="Submit" />
+
+
+</form>
+
+
+
+</body>
+</html>

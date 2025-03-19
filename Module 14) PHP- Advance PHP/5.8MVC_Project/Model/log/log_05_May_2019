@@ -1,0 +1,9 @@
+php_network_getaddresses: getaddrinfo failed: No such host is known. php_network_getaddresses: getaddrinfo failed: No such host is known. php_network_getaddresses: getaddrinfo failed: No such host is known. php_network_getaddresses: getaddrinfo failed: No such host is known. 
+TIME:>> 2019-05-05 09:43 AM
+ErrorMessage:>> Access denied for user ''@'localhost' to database 'masterdatabase'
+
+TIME:>> 2019-05-05 09:43 AM
+ErrorMessage:>> php_network_getaddresses: getaddrinfo failed: No such host is known. 
+
+TIME:>> 2019-05-05 09:43 AM
+ErrorMessage:>> Access denied for user 'root'@'localhost' (using password: YES)
